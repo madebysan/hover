@@ -1,22 +1,22 @@
-<p align="center">
-  <img src="assets/app-icon.png" width="128" height="128" alt="Hover app icon">
-</p>
+<p><img src="assets/app-icon.png" width="128" height="128" alt="Hover app icon"></p>
 
-<h1 align="center">Hover</h1>
+<h1>Hover</h1>
 
-<p align="center">A minimal macOS app that floats a YouTube window above all other apps.<br>
+<p>A minimal macOS app that floats a YouTube window above all other apps.<br>
 Designed for watching playlists while working.</p>
 
-<p align="center">macOS 13+ · Apple Silicon & Intel</p>
-<p align="center"><a href="https://github.com/madebysan/hover/releases/latest"><strong>Download Hover</strong></a></p>
+<p>macOS 13+ · Apple Silicon & Intel</p>
 
----
-
-<p align="center">
-  <img src="assets/demo.gif" alt="Hover floating a YouTube window in the corner while scrolling a Hacker News thread underneath" width="900">
+<p>
+  <img src="https://img.shields.io/badge/Swift-f05138" alt="Swift">
+  <img src="https://img.shields.io/badge/AppKit-0066cc" alt="AppKit">
+  <img src="https://img.shields.io/badge/WebKit-000000" alt="WebKit">
+  <img src="https://img.shields.io/badge/macOS-000000" alt="macOS">
 </p>
 
----
+<p><a href="https://github.com/madebysan/hover/releases/latest">Download Hover</a></p>
+
+![Hover floating a YouTube window in the corner while scrolling a Hacker News thread underneath](assets/demo.gif)
 
 Hover is a small always-on-top YouTube window for macOS. It stays above every other app, survives fullscreen mode, and stays logged in across restarts. Drop it in a corner and keep working while a video plays.
 
