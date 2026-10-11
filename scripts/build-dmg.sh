@@ -1,14 +1,14 @@
 #!/bin/bash
-# Builds YT Mac Player as a signed, notarized .app bundle and packages it into a DMG.
+# Builds Hover as a signed, notarized .app bundle and packages it into a DMG.
 # Prerequisites: Developer ID certificate installed, notarytool credentials stored as "notarytool".
 set -e
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-APP_NAME="YT Mac Player"
+APP_NAME="Hover"
 BUNDLE_NAME="$APP_NAME.app"
 BUILD_DIR="$PROJECT_DIR/.build/release"
 DIST_DIR="$PROJECT_DIR/dist"
-DMG_NAME="YT-Mac-Player"
+DMG_NAME="Hover"
 SIGN_IDENTITY="Developer ID Application: Santiago Alonso Alexandre (QAMM2A6WRQ)"
 
 echo "=== Building release binary ==="
@@ -22,7 +22,7 @@ mkdir -p "$DIST_DIR/$BUNDLE_NAME/Contents/MacOS"
 mkdir -p "$DIST_DIR/$BUNDLE_NAME/Contents/Resources"
 
 # Copy the binary
-cp "$BUILD_DIR/YTMacPlayer" "$DIST_DIR/$BUNDLE_NAME/Contents/MacOS/"
+cp "$BUILD_DIR/Hover" "$DIST_DIR/$BUNDLE_NAME/Contents/MacOS/"
 
 # Copy Info.plist
 cp "$PROJECT_DIR/Info.plist" "$DIST_DIR/$BUNDLE_NAME/Contents/"
@@ -93,7 +93,7 @@ echo "=== Done ==="
 echo "  DMG: $DIST_DIR/$DMG_NAME.dmg (signed + notarized)"
 echo "  App: $DIST_DIR/$BUNDLE_NAME (signed)"
 echo ""
-echo "To install: open the DMG and drag 'YT Mac Player' to Applications."
+echo "To install: open the DMG and drag 'Hover' to Applications."
 echo ""
 echo "Verify with:"
 echo "  codesign --verify --verbose \"$DIST_DIR/$BUNDLE_NAME\""

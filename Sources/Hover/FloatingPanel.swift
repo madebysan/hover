@@ -38,7 +38,7 @@ class FloatingPanel: NSPanel {
         minSize = NSSize(width: 280, height: 200)
 
         // Window title (not visible, but used for Cmd+Tab / accessibility)
-        title = "YT Mac Player"
+        title = "Hover"
 
         // Allow the panel to become key (receive keyboard input) when clicked
         isFloatingPanel = true

@@ -2,14 +2,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "YTMacPlayer",
+    name: "Hover",
     platforms: [
         .macOS(.v13)
     ],
     targets: [
         .executableTarget(
-            name: "YTMacPlayer",
-            path: "Sources/YTMacPlayer",
+            name: "Hover",
+            path: "Sources/Hover",
             linkerSettings: [
                 .unsafeFlags([
                     "-Xlinker", "-sectcreate",

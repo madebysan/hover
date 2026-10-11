@@ -224,7 +224,7 @@ The app saves its window position, size, and opacity to `UserDefaults` every tim
 - **Deployment target:** macOS 13.0 (Ventura)
 - **Dependencies:** None (zero third-party libraries)
 
-The entire app is about 700 lines of Swift, including comments.
+The entire app is about 600 lines of Swift, including comments.
 
 ---
 
@@ -234,7 +234,7 @@ The entire app is about 700 lines of Swift, including comments.
 hover/
 ├── Package.swift                      # Swift Package Manager manifest
 ├── Info.plist                         # App metadata (bundle ID, version, icon)
-├── Entitlements.entitlements          # App sandbox entitlements
+├── Entitlements.entitlements          # Entitlements (sandbox off)
 ├── LICENSE                            # MIT license
 ├── Sources/
 │   └── Hover/
@@ -244,7 +244,7 @@ hover/
 │       ├── YouTubeWebView.swift       # WKWebView with fullscreen override JS
 ├── scripts/
 │   ├── build-dmg.sh                   # Builds signed, notarized .app bundle and DMG
-│   ├── generate-icon.swift            # Generates AppIcon.icns (red play button)
+│   ├── generate-icon.swift            # Original placeholder icon generator (not the shipped icon)
 └── README.md                          # This file
 ```
 
@@ -255,7 +255,7 @@ hover/
 - `FloatingPanel.swift` – `NSPanel` subclass configured for floating behavior, no title bar, minimum size enforcement
 - `YouTubeWebView.swift` – `WKWebView` subclass with Safari UA, fullscreen override JS, aspect ratio detection JS, window drag JS
 - `build-dmg.sh` – Builds a release binary, packages it as a `.app` bundle, code signs + notarizes it, and wraps it in a DMG with an Applications symlink
-- `generate-icon.swift` – Draws a YouTube-style icon (red rounded rect + white play triangle) and exports it as `.icns` for all required sizes
+- `generate-icon.swift` – The original placeholder icon generator (red rounded rect + white play triangle). The shipped `AppIcon.icns` is a designed icon; running this script overwrites it
 
 ---
 
@@ -268,14 +268,6 @@ swift build -c release
 ```
 
 The binary will be at `.build/release/Hover`.
-
-### Generate the App Icon
-
-```bash
-swift scripts/generate-icon.swift
-```
-
-This creates `AppIcon.icns` with a YouTube-style red play button.
 
 ### Build the DMG
 
@@ -302,7 +294,6 @@ The app uses a non-ephemeral `WKWebsiteDataStore`, which should save cookies aut
 **Possible causes:**
 
 - You might have cleared WebKit data via System Settings → Privacy & Security → Safari (this affects all WKWebView apps)
-- The app's sandbox is interfering (this shouldn't happen unless you modified the build settings)
 
 **Solution:** Log in again. If the problem persists, check `~/Library/WebKit/` to see if data is being written.
 

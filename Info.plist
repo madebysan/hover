@@ -3,17 +3,19 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleName</key>
-    <string>YT Mac Player</string>
+    <string>Hover</string>
+    <key>CFBundleDisplayName</key>
+    <string>Hover</string>
     <key>CFBundleIdentifier</key>
-    <string>com.madebysan.yt-mac-player</string>
+    <string>com.madebysan.yt-mac-player</string><!-- kept from the YT Mac Player days so existing installs keep their sign-in and settings -->
     <key>CFBundleVersion</key>
-    <string>2</string>
+    <string>3</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0.1</string>
+    <string>1.1.0</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleExecutable</key>
-    <string>YTMacPlayer</string>
+    <string>Hover</string>
     <key>CFBundleIconFile</key>
     <string>AppIcon</string>
     <key>NSPrincipalClass</key>
