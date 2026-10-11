@@ -1,6 +1,6 @@
 #!/bin/bash
 # Builds Hover as a signed, notarized .app bundle and packages it into a DMG.
-# Prerequisites: Developer ID certificate installed, notarytool credentials stored as "notarytool".
+# Prerequisites: Developer ID certificate installed, notarytool credentials stored as the keychain profile "notarytool".
 set -e
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
@@ -79,7 +79,7 @@ echo ""
 echo "=== Notarizing DMG ==="
 echo "  Submitting to Apple notary service (this may take a few minutes)..."
 xcrun notarytool submit "$DIST_DIR/$DMG_NAME.dmg" \
-    --keychain-profile "notarytool-profile" \
+    --keychain-profile "notarytool" \
     --wait
 echo "  Notarization complete"
 
