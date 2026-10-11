@@ -82,11 +82,11 @@ This creates `dist/Hover.app` and `dist/Hover.dmg`.
 
 ### Logging into Google
 
-The first time the app launches, you'll see the YouTube homepage but won't be logged in.
+When you're not signed in, Hover opens YouTube's sign-in page.
 
-1. Click "Sign In" in the top-right corner
-2. Log in with your Google account
-3. Complete any two-factor authentication if prompted
+1. Log in with your Google account
+2. Complete any two-factor authentication if prompted
+3. Hover takes you to your Watch Later playlist
 
 Your login is saved in persistent cookies stored in `~/Library/WebKit/`. The app will stay logged in across restarts, even if you close it for days or weeks.
 
@@ -98,7 +98,7 @@ If you ever need to switch accounts, just sign out within the app's YouTube page
 
 ### Daily Workflow
 
-1. **Launch the app** – it opens directly to your Watch Later playlist
+1. **Launch the app** – it opens directly to your Watch Later playlist (or the sign-in page if you're signed out)
 2. **Click a video** to start watching
 3. **Enter fullscreen mode** by pressing `f` or clicking YouTube's fullscreen button
    - This is a custom fullscreen-in-window mode, not native macOS fullscreen
@@ -211,7 +211,7 @@ Interactive elements (buttons, links, sliders, the YouTube control bar) are excl
 
 The app saves its window position, size, and opacity to `UserDefaults` every time you move, resize, or change opacity. On launch, it restores the saved state.
 
-**Offscreen recovery:** If the saved position is no longer visible (e.g., you disconnected an external monitor), the app resets to the default position: 320x240 in the bottom-right corner of your main screen.
+**Offscreen recovery:** If the saved position is no longer visible (e.g., you disconnected an external monitor), the app resets to the default position: 400x300 in the bottom-right corner of your main screen.
 
 ---
 
@@ -313,7 +313,7 @@ If the window is positioned on a disconnected monitor, it should auto-recover on
 **Manual recovery:**
 
 - Go to **View → Reset Window Position** in the menu bar
-- This moves the window to the default position (320x240, bottom-right corner)
+- This moves the window to the default position (400x300, bottom-right corner)
 
 ---
 

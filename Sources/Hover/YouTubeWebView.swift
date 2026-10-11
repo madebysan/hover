@@ -292,10 +292,26 @@ class YouTubeWebView: WKWebView {
         fatalError("Not implemented")
     }
 
-    /// Load YouTube Watch Later playlist
+    private static let watchLaterURL = "https://www.youtube.com/playlist?list=WL"
+
+    /// Open the Watch Later playlist. When signed out, Watch Later only says the
+    /// playlist doesn't exist, so open YouTube's sign-in page instead; it returns
+    /// to Watch Later after signing in.
     func loadYouTube() {
-        guard let url = URL(string: "https://www.youtube.com/playlist?list=WL") else { return }
-        load(URLRequest(url: url))
+        configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] cookies in
+            let signedIn = cookies.contains { $0.name == "LOGIN_INFO" && $0.domain.hasSuffix("youtube.com") }
+            var target = YouTubeWebView.watchLaterURL
+            if !signedIn {
+                var signIn = URLComponents(string: "https://accounts.google.com/ServiceLogin")!
+                signIn.queryItems = [
+                    URLQueryItem(name: "service", value: "youtube"),
+                    URLQueryItem(name: "continue", value: YouTubeWebView.watchLaterURL),
+                ]
+                target = signIn.url!.absoluteString
+            }
+            guard let url = URL(string: target) else { return }
+            DispatchQueue.main.async { self?.load(URLRequest(url: url)) }
+        }
     }
 
     /// Reload the current page (for Cmd+R)

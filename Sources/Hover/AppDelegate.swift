@@ -64,7 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler {
 
     // MARK: - Window State Persistence
 
-    /// Returns the saved window frame, or a default 320x240 in the bottom-right corner.
+    /// Returns the saved window frame, or a default 400x300 in the bottom-right corner.
     private func savedWindowFrame() -> NSRect {
         let defaults = UserDefaults.standard
 
@@ -84,15 +84,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler {
             }
         }
 
-        // Default: 320x240, bottom-right corner of main screen
+        // Default: 400x300, bottom-right corner of main screen
         return defaultWindowFrame()
     }
 
-    /// 320x240 positioned in the bottom-right corner of the main screen, with padding.
+    /// 400x300 positioned in the bottom-right corner of the main screen, with padding.
     private func defaultWindowFrame() -> NSRect {
         let screenFrame = NSScreen.main?.visibleFrame ?? NSRect(x: 0, y: 0, width: 1440, height: 900)
-        let width: CGFloat = 320
-        let height: CGFloat = 240
+        let width: CGFloat = 400
+        let height: CGFloat = 300
         let padding: CGFloat = 20
         return NSRect(
             x: screenFrame.maxX - width - padding,
