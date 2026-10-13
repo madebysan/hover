@@ -330,7 +330,7 @@ Found a bug or have a feature idea? [Open an issue](https://github.com/madebysan
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE). Open-source components and their licenses are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ---
 

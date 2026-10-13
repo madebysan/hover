@@ -30,6 +30,9 @@ cp "$PROJECT_DIR/Info.plist" "$DIST_DIR/$BUNDLE_NAME/Contents/"
 # Copy the icon
 cp "$PROJECT_DIR/AppIcon.icns" "$DIST_DIR/$BUNDLE_NAME/Contents/Resources/"
 
+# Ship the open-source license notices inside the app
+cp "$PROJECT_DIR/THIRD_PARTY_NOTICES.md" "$DIST_DIR/$BUNDLE_NAME/Contents/Resources/"
+
 # Embed Sparkle, the in-app updater. ditto keeps the framework's symlinks intact.
 mkdir -p "$DIST_DIR/$BUNDLE_NAME/Contents/Frameworks"
 ditto "$BUILD_DIR/Sparkle.framework" "$DIST_DIR/$BUNDLE_NAME/Contents/Frameworks/Sparkle.framework"
@@ -69,6 +72,7 @@ cp -R "$DIST_DIR/$BUNDLE_NAME" "$DMG_TEMP/"
 
 # Create a symlink to /Applications for easy drag-install
 ln -s /Applications "$DMG_TEMP/Applications"
+cp "$PROJECT_DIR/THIRD_PARTY_NOTICES.md" "$DMG_TEMP/"
 
 # Create the DMG
 hdiutil create \
