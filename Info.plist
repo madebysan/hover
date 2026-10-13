@@ -20,5 +20,11 @@
     <string>AppIcon</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
+    <key>SUFeedURL</key>
+    <string>https://github.com/madebysan/hover/releases/latest/download/appcast.xml</string>
+    <key>SUPublicEDKey</key>
+    <string>UAKRJmeYrucyUDj6yLMjYEKfKXE+M4iLxw7qKBrV8yU=</string>
+    <key>SUEnableAutomaticChecks</key>
+    <true/>
 </dict>
 </plist>

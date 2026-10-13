@@ -30,17 +30,28 @@ cp "$PROJECT_DIR/Info.plist" "$DIST_DIR/$BUNDLE_NAME/Contents/"
 # Copy the icon
 cp "$PROJECT_DIR/AppIcon.icns" "$DIST_DIR/$BUNDLE_NAME/Contents/Resources/"
 
+# Embed Sparkle, the in-app updater. ditto keeps the framework's symlinks intact.
+mkdir -p "$DIST_DIR/$BUNDLE_NAME/Contents/Frameworks"
+ditto "$BUILD_DIR/Sparkle.framework" "$DIST_DIR/$BUNDLE_NAME/Contents/Frameworks/Sparkle.framework"
+
 echo "  App bundle created at: $DIST_DIR/$BUNDLE_NAME"
 
 echo ""
 echo "=== Code signing app bundle ==="
-codesign --deep --force --options runtime \
+# Sign Sparkle's nested code inside-out, then the app, without --deep.
+FW="$DIST_DIR/$BUNDLE_NAME/Contents/Frameworks/Sparkle.framework"
+codesign -f -o runtime --timestamp -s "$SIGN_IDENTITY" "$FW/Versions/B/XPCServices/Installer.xpc"
+codesign -f -o runtime --timestamp --preserve-metadata=entitlements -s "$SIGN_IDENTITY" "$FW/Versions/B/XPCServices/Downloader.xpc"
+codesign -f -o runtime --timestamp -s "$SIGN_IDENTITY" "$FW/Versions/B/Autoupdate"
+codesign -f -o runtime --timestamp -s "$SIGN_IDENTITY" "$FW/Versions/B/Updater.app"
+codesign -f -o runtime --timestamp -s "$SIGN_IDENTITY" "$FW"
+codesign --force --options runtime --timestamp \
     --sign "$SIGN_IDENTITY" \
     "$DIST_DIR/$BUNDLE_NAME"
 echo "  App signed successfully"
 
 # Verify the signature
-codesign --verify --verbose "$DIST_DIR/$BUNDLE_NAME"
+codesign --verify --deep --strict --verbose "$DIST_DIR/$BUNDLE_NAME"
 echo "  Signature verified"
 
 echo ""

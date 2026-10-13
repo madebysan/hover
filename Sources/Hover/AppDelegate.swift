@@ -1,4 +1,5 @@
 import Cocoa
+import Sparkle
 import WebKit
 
 // UserDefaults keys for persisting window state
@@ -14,12 +15,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler {
 
     private var panel: FloatingPanel!
     private var webView: YouTubeWebView!
+    // In-app updates. Started only from a bundle that has a feed URL, so
+    // `swift run` and tests don't show Sparkle's "failed to start" alert.
+    private lazy var updaterController = SPUStandardUpdaterController(
+        startingUpdater: false, updaterDelegate: nil, userDriverDelegate: nil
+    )
 
     // MARK: - App Lifecycle
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Activate the app so it appears in Dock and Cmd+Tab
         NSApp.setActivationPolicy(.regular)
+
+        if Bundle.main.object(forInfoDictionaryKey: "SUFeedURL") != nil {
+            updaterController.startUpdater()
+        }
 
         // Create the floating panel at saved or default position
         let frame = savedWindowFrame()
@@ -167,6 +177,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler {
         let appMenuItem = NSMenuItem()
         let appMenu = NSMenu()
         appMenu.addItem(withTitle: "About Hover", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: "")
+        let updateItem = NSMenuItem(title: "Check for Updates…", action: #selector(SPUStandardUpdaterController.checkForUpdates(_:)), keyEquivalent: "")
+        updateItem.target = updaterController
+        appMenu.addItem(updateItem)
         appMenu.addItem(.separator())
         appMenu.addItem(withTitle: "Quit Hover", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         appMenuItem.submenu = appMenu
