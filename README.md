@@ -32,9 +32,7 @@ Hover is a WebKit browser window that stays on top and keeps its cookies, so the
 
 Fullscreen depends on how YouTube's page is built, so a YouTube redesign can break it until Hover is updated. YouTube Premium is recommended; without it, ads play as usual.
 
-## Alternatives
-
-Every Mac browser has picture-in-picture, and [Floating](https://apps.apple.com/us/app/floating-picture-in-picture/id1508833245) pins any website above other windows. Hover is narrower: one YouTube window that stays signed in, keeps the video's shape, and goes fullscreen inside itself.
+Hover only does YouTube. For other sites, every Mac browser has picture-in-picture, and [Floating](https://apps.apple.com/us/app/floating-picture-in-picture/id1508833245) pins any website above other windows.
 
 ## Install
 
