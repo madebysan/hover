@@ -5,7 +5,7 @@
 <p>A floating YouTube window for your Mac.<br>
 Always on top, signed in across restarts, fullscreen inside its own window.</p>
 
-<p><strong>Version 1.1.0</strong> · macOS 13+ · Apple Silicon & Intel</p>
+<p><strong>Version 1.2.0</strong> · macOS 13+ · Apple Silicon & Intel</p>
 
 <p>
   <img src="https://img.shields.io/badge/Swift-f05138" alt="Swift">

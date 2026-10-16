@@ -9,9 +9,9 @@
     <key>CFBundleIdentifier</key>
     <string>com.madebysan.yt-mac-player</string><!-- kept from the YT Mac Player days so existing installs keep their sign-in and settings -->
     <key>CFBundleVersion</key>
-    <string>3</string>
+    <string>4</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.1.0</string>
+    <string>1.2.0</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleExecutable</key>
