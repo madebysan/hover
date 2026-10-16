@@ -292,25 +292,16 @@ class YouTubeWebView: WKWebView {
         fatalError("Not implemented")
     }
 
-    private static let watchLaterURL = "https://www.youtube.com/playlist?list=WL"
-
-    /// Open the Watch Later playlist. When signed out, Watch Later only says the
-    /// playlist doesn't exist, so open YouTube's sign-in page instead; it returns
-    /// to Watch Later after signing in.
-    func loadYouTube() {
+    /// Open the start page chosen in Settings (Watch Later by default). Watch Later
+    /// only exists when signed in, so a signed-out launch opens YouTube Home instead:
+    /// Hover stays usable without an account, and YouTube's own Sign In button is
+    /// there for anyone who wants Watch Later. Home and specific pages work signed out.
+    func loadStartPage() {
+        let start = StartPage.resolvedURL
         configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] cookies in
             let signedIn = cookies.contains { $0.name == "LOGIN_INFO" && $0.domain.hasSuffix("youtube.com") }
-            var target = YouTubeWebView.watchLaterURL
-            if !signedIn {
-                var signIn = URLComponents(string: "https://accounts.google.com/ServiceLogin")!
-                signIn.queryItems = [
-                    URLQueryItem(name: "service", value: "youtube"),
-                    URLQueryItem(name: "continue", value: YouTubeWebView.watchLaterURL),
-                ]
-                target = signIn.url!.absoluteString
-            }
-            guard let url = URL(string: target) else { return }
-            DispatchQueue.main.async { self?.load(URLRequest(url: url)) }
+            let target = (!signedIn && start == StartPage.watchLaterURL) ? StartPage.homeURL : start
+            DispatchQueue.main.async { self?.load(URLRequest(url: target)) }
         }
     }
 

@@ -6,11 +6,21 @@ The full reference: first launch, shortcuts, internals, project layout and troub
 
 ### Logging into Google
 
-When you're not signed in, Hover opens YouTube's sign-in page.
+You don't need an account. When you're signed out, Hover opens YouTube Home and works like any signed-out YouTube window. To get your Watch Later list:
 
-1. Log in with your Google account
+1. Click YouTube's **Sign in** button and log in with your Google account
 2. Complete any two-factor authentication if prompted
-3. Hover takes you to your Watch Later playlist
+3. From then on, Hover opens your Watch Later playlist at launch
+
+### Choosing the start page
+
+Open **Hover → Settings…** (`Cmd+,`) and pick what Hover opens at launch:
+
+- **Watch Later** (default): your Watch Later playlist, or YouTube Home when you're signed out
+- **YouTube Home**: YouTube's home page, signed in or out
+- **A Specific Page**: any YouTube address, such as one video or playlist. Type or paste it, or click **Use Current Page** to use the page open in Hover. Non-YouTube addresses aren't accepted; until a valid one is entered, Hover falls back to Watch Later.
+
+**View → Go to Start Page** (`Cmd+Shift+H`) returns to it at any time.
 
 Your login is saved in persistent cookies stored in `~/Library/WebKit/`. The app will stay logged in across restarts, even if you close it for days or weeks.
 
@@ -20,7 +30,7 @@ If you ever need to switch accounts, just sign out within the app's YouTube page
 
 ### Daily Workflow
 
-1. **Launch the app**: it opens directly to your Watch Later playlist (or the sign-in page if you're signed out)
+1. **Launch the app**: it opens your start page, Watch Later by default (YouTube Home if you're signed out)
 2. **Click a video** to start watching
 3. **Enter fullscreen mode** by pressing `f` or clicking YouTube's fullscreen button
    - This is a custom fullscreen-in-window mode, not native macOS fullscreen
@@ -42,6 +52,8 @@ If you ever need to switch accounts, just sign out within the app's YouTube page
 | `Cmd+Q` | Quit the app |
 | `Cmd+W` | Close the window (same as quitting) |
 | `Cmd+R` | Reload the page |
+| `Cmd+Shift+H` | Go to the start page |
+| `Cmd+,` | Open Settings (start page) |
 | `Cmd+M` | Minimize to Dock |
 | `Cmd++` | Increase opacity by 10% |
 | `Cmd+-` | Decrease opacity by 10% (minimum 20%) |
@@ -147,6 +159,8 @@ hover/
 │       ├── AppDelegate.swift          # Window management, state persistence, menu bar
 │       ├── FloatingPanel.swift        # NSPanel configured for always-on-top
 │       ├── YouTubeWebView.swift       # WKWebView with fullscreen override JS
+│       ├── StartPage.swift            # Start page choice and YouTube address check
+│       ├── SettingsWindowController.swift  # Settings window (start page)
 ├── scripts/
 │   ├── build-dmg.sh                   # Builds signed, notarized .app bundle and DMG, embeds Sparkle
 │   ├── generate-icon.swift            # Original placeholder icon generator (not the shipped icon)
@@ -158,7 +172,9 @@ hover/
 - `main.swift`: Creates the `NSApplication` instance, assigns the app delegate, and starts the event loop (7 lines)
 - `AppDelegate.swift`: App lifecycle, window state persistence, menu bar setup, message handling from JavaScript (aspect ratio, window drag)
 - `FloatingPanel.swift`: `NSPanel` subclass configured for floating behavior, no title bar, minimum size enforcement
-- `YouTubeWebView.swift`: `WKWebView` subclass with Safari UA, fullscreen override JS, aspect ratio detection JS, window drag JS
+- `YouTubeWebView.swift`: `WKWebView` subclass with Safari UA, fullscreen override JS, aspect ratio detection JS, window drag JS; loads the start page (YouTube Home instead of Watch Later when signed out)
+- `StartPage.swift`: the start page choice (Watch Later, YouTube Home or a specific page), saved in UserDefaults, plus the check that a typed address is a YouTube one
+- `SettingsWindowController.swift`: the small AppKit Settings window (`Cmd+,`) for choosing the start page
 - `build-dmg.sh`: Builds a release binary, packages it as a `.app` bundle, code signs + notarizes it, and wraps it in a DMG with an Applications symlink
 - `generate-icon.swift`: The original placeholder icon generator (red rounded rect + white play triangle). The shipped `AppIcon.icns` is a designed icon; running this script overwrites it
 

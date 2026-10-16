@@ -22,7 +22,7 @@ Hover keeps a small YouTube window in a corner of your Mac, so a playlist can pl
 
 - It floats above every app, fullscreen ones included, and reopens where you left it.
 - Fullscreen fills the window, not your screen, so your other apps stay put.
-- Sign in once and it opens straight to your Watch Later list.
+- Works signed out. Sign in once and it opens straight to your Watch Later list, or pick another start page in Settings.
 
 ## How it works
 

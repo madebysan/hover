@@ -20,6 +20,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler {
     private lazy var updaterController = SPUStandardUpdaterController(
         startingUpdater: false, updaterDelegate: nil, userDriverDelegate: nil
     )
+    private lazy var settingsController = SettingsWindowController { [weak self] in
+        self?.webView.url
+    }
 
     // MARK: - App Lifecycle
 
@@ -61,7 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler {
         // Show the window and load YouTube
         panel.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
-        webView.loadYouTube()
+        webView.loadStartPage()
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -181,6 +184,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler {
         updateItem.target = updaterController
         appMenu.addItem(updateItem)
         appMenu.addItem(.separator())
+        appMenu.addItem(withTitle: "Settings…", action: #selector(showSettings), keyEquivalent: ",")
+        appMenu.addItem(.separator())
         appMenu.addItem(withTitle: "Quit Hover", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         appMenuItem.submenu = appMenu
         mainMenu.addItem(appMenuItem)
@@ -189,6 +194,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler {
         let viewMenuItem = NSMenuItem()
         let viewMenu = NSMenu(title: "View")
         viewMenu.addItem(withTitle: "Reload Page", action: #selector(reloadPage), keyEquivalent: "r")
+        viewMenu.addItem(withTitle: "Go to Start Page", action: #selector(goToStartPage), keyEquivalent: "H")
         viewMenu.addItem(.separator())
         viewMenu.addItem(withTitle: "Increase Opacity", action: #selector(increaseOpacity), keyEquivalent: "+")
         viewMenu.items.last?.keyEquivalentModifierMask = [.command]
@@ -214,6 +220,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler {
 
     @objc private func reloadPage() {
         webView.reloadPage()
+    }
+
+    @objc private func goToStartPage() {
+        webView.loadStartPage()
+    }
+
+    @objc private func showSettings() {
+        settingsController.show()
     }
 
     @objc private func increaseOpacity() {
