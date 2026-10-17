@@ -22,11 +22,11 @@ Hover keeps a small YouTube window in a corner of your Mac, so a playlist can pl
 
 - It floats above every app, fullscreen ones included, and reopens where you left it.
 - Fullscreen fills the window, not your screen, so your other apps stay put.
-- Works signed out. Sign in once and it opens straight to your Watch Later list, or pick another start page in Settings.
+- It opens to your Watch Later list, or any start page you pick.
 
 ## How it works
 
-Hover is a WebKit browser window that stays on top and keeps its cookies, so there's no YouTube API or OAuth involved. Press `f` or double-click the video for fullscreen; Hover intercepts YouTube's own fullscreen and hides the page around the player instead. Drag anywhere on the video to move the window, resize from any edge and it keeps the video's shape, and use `Cmd +` and `Cmd -` to set opacity between 20% and 100%. Every shortcut and how each part works are in [docs/how-it-works.md](docs/how-it-works.md).
+Hover is a WebKit browser window that stays on top and keeps its cookies, so there's no YouTube API or OAuth involved. You don't need to sign in; signed out, it opens YouTube Home. Press `f` or double-click the video for fullscreen; Hover intercepts YouTube's own fullscreen and hides the page around the player instead. Drag anywhere on the video to move the window, resize from any edge and it keeps the video's shape, and use `Cmd +` and `Cmd -` to set opacity between 20% and 100%. Every shortcut and how each part works are in [docs/how-it-works.md](docs/how-it-works.md).
 
 ## Limits
 
