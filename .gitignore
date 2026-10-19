@@ -11,5 +11,3 @@ dist/
 .swiftpm/
 Package.resolved
 
-# Internal docs
-PRD.md
